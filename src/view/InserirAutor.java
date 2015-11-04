@@ -19,7 +19,6 @@ public class InserirAutor extends javax.swing.JFrame {
     private List<Livro> listaLivrosSelecionados = new ArrayList();
     private List<Livro> listaLivros = new ArrayList();
 
-
     /**
      * Creates new form InserirAutor
      */
@@ -84,6 +83,8 @@ public class InserirAutor extends javax.swing.JFrame {
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
+        jTextArea1.setEnabled(false);
+        jTextArea1.setFocusable(false);
         jScrollPane1.setViewportView(jTextArea1);
 
         jButton2.setText("Salvar Autor");
@@ -160,16 +161,20 @@ public class InserirAutor extends javax.swing.JFrame {
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        listaLivrosSelecionados.add((Livro) jComboBox1.getSelectedItem());        
-        jComboBox1.removeItem(jComboBox1.getSelectedItem());            
-        jTextArea1.setText(getLivrosList(listaLivrosSelecionados));
+        if (jComboBox1.getItemCount() != 0) {
+            listaLivrosSelecionados.add((Livro) jComboBox1.getSelectedItem());
+            Livro livro = (Livro) jComboBox1.getSelectedItem();
+            jComboBox1.removeItem(jComboBox1.getSelectedItem());
+            jTextArea1.append(livro.getTitulo() + "\n");
+        }
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private String getLivrosList(List<Livro> listaLivros) {
         String text = "";
-        for(Livro livro : listaLivros)
-            text = livro.getTitulo()+"\n";
+        for (Livro livro : listaLivros) {
+            text = livro.getTitulo() + "\n";
+        }
         return text;
     }
 
