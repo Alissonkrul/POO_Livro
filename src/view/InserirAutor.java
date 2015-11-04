@@ -5,17 +5,32 @@
  */
 package view;
 
+import main.Livro;
+import java.util.ArrayList;
+import java.util.List;
+import main.LivroDAO;
+
 /**
  *
  * @author Alisson
  */
 public class InserirAutor extends javax.swing.JFrame {
 
+    private List<Livro> listaLivrosSelecionados = new ArrayList();
+    private List<Livro> listaLivros = new ArrayList();
+
+
     /**
      * Creates new form InserirAutor
      */
     public InserirAutor() {
         initComponents();
+        LivroDAO livroDAO = new LivroDAO();
+        listaLivros = livroDAO.listarLivroComAutores();
+        //Montando Select
+        for (Livro livro : listaLivros) {
+            jComboBox1.addItem(livro);
+        }
     }
 
     /**
@@ -53,9 +68,19 @@ public class InserirAutor extends javax.swing.JFrame {
 
         jLabel2.setText("Nome:");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel());
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
 
         jButton1.setText("Add");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
@@ -130,6 +155,25 @@ public class InserirAutor extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
 
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox1ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        listaLivrosSelecionados.add((Livro) jComboBox1.getSelectedItem());        
+        jComboBox1.removeItem(jComboBox1.getSelectedItem());            
+        jTextArea1.setText(getLivrosList(listaLivrosSelecionados));
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private String getLivrosList(List<Livro> listaLivros) {
+        String text = "";
+        for(Livro livro : listaLivros)
+            text = livro.getTitulo()+"\n";
+        return text;
+    }
+
+    ;
     /**
      * @param args the command line arguments
      */

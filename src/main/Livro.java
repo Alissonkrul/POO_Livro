@@ -1,9 +1,11 @@
+package main;
+
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public final class Livro {
+public class Livro {
 
     private int id;
     private String titulo;
@@ -57,4 +59,10 @@ public final class Livro {
         this.id = id;
     }
     
-}
+    @Override
+    public String toString() {  
+        return getTitulo(); 
+    }
+}   
+    
+
