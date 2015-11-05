@@ -26,7 +26,7 @@ public class MainLivroAutor {
             System.out.println("  1 - Incluir Autor");
             System.out.println("  2 - Incluir Livro");
             System.out.println("  3 - Listar Autores");
-            System.out.println("  4 - Listar Livro com autores");
+            System.out.println("  4 - Listar Livros com autores");
             System.out.println("  5 - Listar Autores de um livro");
             System.out.println("  6 - Listar Livros de um autor");
             System.out.println("  7 - Sair");

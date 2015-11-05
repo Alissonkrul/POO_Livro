@@ -17,23 +17,23 @@ import main.LivroDAO;
  *
  * @author Alisson
  */
-public class InserirAutor extends javax.swing.JFrame {
+public class InserirLivro extends javax.swing.JFrame {
 
-    private List<Livro> listaLivrosSelecionados = new ArrayList();
-    private List<Livro> listaLivros = new ArrayList();
+    private List<Autor> listaAutoresSelecionados = new ArrayList();
+    private List<Autor> listaAutores = new ArrayList();
     private JFrame calledBy;
 
     /**
      * Creates new form InserirAutor
      */
-    public InserirAutor(Menu calledBy) {
+    public InserirLivro(Menu calledBy) throws Exception {
         initComponents();
-        LivroDAO livroDAO = new LivroDAO();
-        listaLivros = livroDAO.listarLivroComAutores();
+        AutorDAO autorDAO = new AutorDAO();
+        listaAutores = autorDAO.listarAutores();
         this.calledBy = calledBy;
         //Montando Select
-        for (Livro livro : listaLivros) {
-            jComboBox1.addItem(livro);
+        for (Autor autor : listaAutores) {
+            jComboBox1.addItem(autor);
         }
     }
 
@@ -61,7 +61,7 @@ public class InserirAutor extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Tempus Sans ITC", 0, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Inserir Autor");
+        jLabel1.setText("Inserir Livro");
 
         nome.setText("jTextField1");
         nome.addActionListener(new java.awt.event.ActionListener() {
@@ -92,7 +92,7 @@ public class InserirAutor extends javax.swing.JFrame {
         jTextArea1.setFocusable(false);
         jScrollPane1.setViewportView(jTextArea1);
 
-        jButton2.setText("Salvar Autor");
+        jButton2.setText("Salvar Livro");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -114,11 +114,6 @@ public class InserirAutor extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(39, 39, 39)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -133,13 +128,17 @@ public class InserirAutor extends javax.swing.JFrame {
                                         .addGap(18, 18, 18)
                                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addComponent(nome)))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 298, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 35, Short.MAX_VALUE)))
-                .addContainerGap())
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 298, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(59, 59, 59)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(45, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
-                .addGap(59, 59, 59)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(22, 22, 22))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -179,33 +178,33 @@ public class InserirAutor extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         if (jComboBox1.getItemCount() != 0) {
-            listaLivrosSelecionados.add((Livro) jComboBox1.getSelectedItem());
-            Livro livro = (Livro) jComboBox1.getSelectedItem();
+            listaAutoresSelecionados.add((Autor) jComboBox1.getSelectedItem());
+            Autor autor = (Autor) jComboBox1.getSelectedItem();
             jComboBox1.removeItem(jComboBox1.getSelectedItem());
-            jTextArea1.append(livro.getTitulo() + "\n");
+            jTextArea1.append(autor.getNome() + "\n");
         }
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-       //Salvar novo autor associado aos seus respectivos livros
-       Autor autor = new Autor(nome.getText(), listaLivrosSelecionados);
-       AutorDAO autorDAO = new AutorDAO();
-       autorDAO.inserirAutor(autor);
-       this.dispose();
-       calledBy.setVisible(true);
-       
+        //Salvar novo autor associado aos seus respectivos livros
+        Livro livro = new Livro(nome.getText(), listaAutoresSelecionados);
+        LivroDAO livroDAO = new LivroDAO();
+        livroDAO.inserirLivro(livro);
+        this.dispose();
+        calledBy.setVisible(true);
+
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         this.dispose();
-        calledBy.setVisible(true);
+        calledBy.setVisible(true);        // TODO add your handling code here:
     }//GEN-LAST:event_jButton3ActionPerformed
 
-    private String getLivrosList(List<Livro> listaLivros) {
+    private String getAutoresList(List<Autor> listaAutores) {
         String text = "";
-        for (Livro livro : listaLivros) {
-            text = livro.getTitulo() + "\n";
+        for (Autor autor : listaAutores) {
+            text = autor.getNome() + "\n";
         }
         return text;
     }
