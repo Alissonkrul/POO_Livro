@@ -49,7 +49,7 @@ public class MainLivroAutor {
                     main.listarAutoresLivro();
                     break;
                 case "6":
-                     main.listarLivroAutores();
+                     main.listarLivrosAutor();
                     break;
                 default:
                     System.out.println("Opção inválida.");
@@ -150,13 +150,14 @@ public class MainLivroAutor {
         }
     };
     
-    public void listarLivroAutores() throws Exception{
+    public void listarLivrosAutor() throws Exception{
         System.out.print("Digite o id do autor:");
         Scanner sc = new Scanner(System.in,"ISO-8859-1");
         int idAutor = sc.nextInt();
         List<Livro> listaLivros = new ArrayList();
         
         Autor autor = autorDAO.consultarAutor(idAutor);
+        
         listaLivros = autor.getLivros();
         System.out.println("ID\tNOME");
         for(Livro livro:listaLivros){

@@ -143,14 +143,14 @@ public class ListarLivrosAutor extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         AutorDAO autorDAO = new AutorDAO();
-        int idAutor = Integer.parseInt(jTextField1.getText());
         try {
+            int idAutor = Integer.parseInt(jTextField1.getText());
             Autor autor = autorDAO.consultarAutor(idAutor);
-            List listaLivros = autor.getLivros();
-            livro.setAutores(listaAutores);
+            //System.out.println(autor.toString());
+
             textAreaAutores.setText(getLivrosAutorList(autor));
         } catch (Exception ex) {
-            textAreaAutores.setText("Id invalido meu Jovem");
+            textAreaAutores.setText("Id invalido meu Jovem " + ex.toString());
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 

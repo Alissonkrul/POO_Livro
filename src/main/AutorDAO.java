@@ -49,9 +49,12 @@ public class AutorDAO {
             stmt = con.prepareStatement(stmtConsultar);
             stmt.setInt(1, id);
             rs = stmt.executeQuery();
+            
             if(rs.next()){
                 autorLido = new Autor(rs.getString("nome"));
                 autorLido.setId(rs.getInt("id"));
+                List<Livro> listaLivros = lerLivros(id,con);
+                autorLido.setLivros(listaLivros);                        
                 return autorLido;
             }else{
                 throw new RuntimeException("Não existe autor com este id. Id="+id);
@@ -78,6 +81,29 @@ public class AutorDAO {
         }
     }
 
+    private List<Livro> lerLivros(long idAutor, Connection con) throws SQLException{
+        //Select para pegar os autores de um livro
+        String sql = "SELECT livro.id,livro.titulo"
+                + " FROM livro"
+                + " INNER JOIN livro_autor"
+                + " 	ON livro.id = livro_autor.idLivro"
+                + " WHERE livro_autor.idAutor = ? ";
+        PreparedStatement stmt = null;
+        List<Livro> livros = null;
+        stmt = con.prepareStatement(sql);
+        stmt.setLong(1, idAutor);
+        ResultSet resultado = stmt.executeQuery();
+        livros = new ArrayList<Livro>();
+        while (resultado.next()) {
+            System.out.print(resultado.getString("titulo"));
+            Livro livro = new Livro(resultado.getString("titulo"));
+            livro.setId(resultado.getInt("id"));
+            livros.add(livro);
+        }
+
+        return livros;
+    }
+    
     public List<Autor> listarAutores() throws Exception {
         Connection con = null;
         PreparedStatement stmt = null;

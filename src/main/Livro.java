@@ -11,10 +11,14 @@ public class Livro {
     private String titulo;
     private List<Autor> autores;
 
-    public Livro(String titulo,List<Autor> autores) {
+    public Livro(String titulo, List<Autor> autores) {
         this.titulo = titulo;
         this.autores = new ArrayList();
         this.setAutores(autores);
+    }
+
+    public Livro(String titulo) {
+        this.titulo = titulo;
     }
 
     public void setTitulo(String titulo) {
