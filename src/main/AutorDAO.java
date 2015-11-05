@@ -54,7 +54,8 @@ public class AutorDAO {
                 autorLido = new Autor(rs.getString("nome"));
                 autorLido.setId(rs.getInt("id"));
                 List<Livro> listaLivros = lerLivros(id,con);
-                autorLido.setLivros(listaLivros);                        
+                for(Livro livro : listaLivros)
+                autorLido.setLivros(listaLivros);
                 return autorLido;
             }else{
                 throw new RuntimeException("Não existe autor com este id. Id="+id);
@@ -95,7 +96,6 @@ public class AutorDAO {
         ResultSet resultado = stmt.executeQuery();
         livros = new ArrayList<Livro>();
         while (resultado.next()) {
-            System.out.print(resultado.getString("titulo"));
             Livro livro = new Livro(resultado.getString("titulo"));
             livro.setId(resultado.getInt("id"));
             livros.add(livro);

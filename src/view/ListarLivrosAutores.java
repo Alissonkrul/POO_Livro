@@ -67,7 +67,7 @@ public class ListarLivrosAutores extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Tempus Sans ITC", 0, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Autores");
+        jLabel1.setText("Livros e seus Autores");
 
         textAreaAutores.setColumns(20);
         textAreaAutores.setRows(5);

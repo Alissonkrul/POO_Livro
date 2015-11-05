@@ -65,7 +65,7 @@ public class ListarLivrosAutor extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Tempus Sans ITC", 0, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Autores por Livro");
+        jLabel1.setText("Livros por Autor");
 
         textAreaAutores.setColumns(20);
         textAreaAutores.setRows(5);
@@ -86,8 +86,6 @@ public class ListarLivrosAutor extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-
-        jTextField1.setText("jTextField1");
 
         jLabel2.setText("Id:");
 
@@ -146,8 +144,6 @@ public class ListarLivrosAutor extends javax.swing.JFrame {
         try {
             int idAutor = Integer.parseInt(jTextField1.getText());
             Autor autor = autorDAO.consultarAutor(idAutor);
-            //System.out.println(autor.toString());
-
             textAreaAutores.setText(getLivrosAutorList(autor));
         } catch (Exception ex) {
             textAreaAutores.setText("Id invalido meu Jovem " + ex.toString());

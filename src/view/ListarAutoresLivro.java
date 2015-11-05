@@ -87,8 +87,6 @@ public class ListarAutoresLivro extends javax.swing.JFrame {
             }
         });
 
-        jTextField1.setText("jTextField1");
-
         jLabel2.setText("Id:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

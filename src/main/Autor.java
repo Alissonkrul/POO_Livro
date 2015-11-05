@@ -13,8 +13,8 @@ public final class Autor {
         this.nome = nome;
         this.livros = new ArrayList();
     }
-    
-     public Autor(String nome, List<Livro> livros) {
+
+    public Autor(String nome, List<Livro> livros) {
         this.nome = nome;
         this.livros = livros;
     }
@@ -28,8 +28,8 @@ public final class Autor {
     }
 
     public void setLivros(List<Livro> livros) {
-         for(Livro livro: livros){
-             this.adicionarLivro(livro);
+        for (Livro livro : livros) {
+            this.adicionarLivro(livro);
         }
     }
 
@@ -40,7 +40,6 @@ public final class Autor {
     public void adicionarLivro(Livro livro) {
         if (!this.getLivros().contains(livro)) {
             this.livros.add(livro);
-            livro.adicionarAutor(this);
         }
     }
 
@@ -58,9 +57,9 @@ public final class Autor {
     public void setId(int id) {
         this.id = id;
     }
-    
+
     @Override
-    public String toString() {  
-        return getNome(); 
+    public String toString() {
+        return getNome();
     }
 }

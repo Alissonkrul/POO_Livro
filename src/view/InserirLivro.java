@@ -63,7 +63,6 @@ public class InserirLivro extends javax.swing.JFrame {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Inserir Livro");
 
-        nome.setText("jTextField1");
         nome.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 nomeActionPerformed(evt);
@@ -106,7 +105,7 @@ public class InserirLivro extends javax.swing.JFrame {
             }
         });
 
-        jLabel3.setText("Livro:");
+        jLabel3.setText("Autor:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
